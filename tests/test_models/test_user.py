@@ -112,10 +112,9 @@ class TestUser(unittest.TestCase):
     def test_init_args_kwargs(self):
         """Test initialization with args and kwargs."""
         dt = datetime.utcnow()
-        st = User("1", id="5", created_at=dt)
+        st = User("1", id="5", created_at=dt.isoformat())
         self.assertEqual(st.id, "5")
         self.assertEqual(st.created_at, dt)
-        self.assertIsInstance(st.created_at, datetime)
 
     def test_str(self):
         """Test __str__ representation."""

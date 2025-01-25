@@ -101,8 +101,7 @@ class TestAmenity(unittest.TestCase):
         self.assertEqual(new_d["updated_at"], am.updated_at.strftime(t_format))
 
     def test_str(self):
-        """Test that the str method has the correct output."""
-        user = User(email="poppy@holberton.com", password="betty98")
-        string = "[User] ({}) {}".format(user.id, user.__dict__)
-        string = string.replace('"_sa_instance_state":', '')
-        self.assertEqual(string, str(user))
+        """test that the str method has the correct output"""
+        amenity = Amenity()
+        string = "[Amenity] ({}) {}".format(amenity.id, amenity.__dict__)
+        self.assertEqual(string, str(amenity))
