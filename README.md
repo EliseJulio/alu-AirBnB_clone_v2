@@ -43,7 +43,7 @@ This repository contains the initial stage of a student project to build a clone
 
     * create - Creates an instance based on given class
 
-    *  - Destroys an object based on class and UUID
+    * destroy - Destroys an object based on class and UUID
 
     * show - Shows an object based on class and UUID
 
