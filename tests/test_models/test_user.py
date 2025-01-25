@@ -115,6 +115,7 @@ class TestUser(unittest.TestCase):
         st = User("1", id="5", created_at=dt.isoformat())
         self.assertEqual(st.id, "5")
         self.assertEqual(st.created_at, dt)
+        self.assertIsInstance(st.created_at, datetime)
 
     def test_str(self):
         """Test __str__ representation."""
