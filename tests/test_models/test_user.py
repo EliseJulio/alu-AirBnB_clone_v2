@@ -113,7 +113,6 @@ class TestUser(unittest.TestCase):
         """Test initialization with args and kwargs."""
         dt = datetime.utcnow()
         st = User("1", id="5", created_at=dt.isoformat())
-        created_at = datetime.fromisoformat(st.created_at)
         self.assertEqual(st.id, "5")
         self.assertEqual(st.created_at, dt)
 
