@@ -9,7 +9,6 @@ hosts = ["54.85.169.157", "54.227.112.222"]
 user = "ubuntu"
 key_path = "~/.ssh/id_rsa"
 
-
 @task
 def do_deploy(c, archive_path):
     """Deploys an archive to web servers"""
@@ -22,8 +21,7 @@ def do_deploy(c, archive_path):
 
         # Connect to each server and execute commands
         for host in hosts:
-            conn = Connection(host=host, user=user, connect_kwargs={
-                              "key_filename": key_path})
+            conn = Connection(host=host, user=user, connect_kwargs={"key_filename": key_path})
 
             conn.put(archive_path, "/tmp/")
             conn.run(f"mkdir -p {path_name}/")
@@ -38,3 +36,4 @@ def do_deploy(c, archive_path):
     except Exception as e:
         print(f"Error: {e}")
         return False
+
