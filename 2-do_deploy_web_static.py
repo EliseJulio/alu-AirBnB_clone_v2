@@ -1,40 +1,33 @@
 #!/usr/bin/python3
-"""Fabric script that distributes an archive to web servers"""
-from fabric import Connection
-from fabric import task
+"""Fabric script that distributes an archive to your web servers"""
+from fabric.api import env, put, run
 from os.path import exists
 
-# Define the servers
-hosts = ["54.85.169.157", "54.227.112.222"]
-user = "ubuntu"
-key_path = "~/.ssh/id_rsa"
+env.hosts = ["54.82.91.217", "34.228.244.169"]
+env.user = "ubuntu"
+env.key = "~/.ssh/school"
 
 
-@task
-def do_deploy(c, archive_path):
-    """Deploys an archive to web servers"""
+def do_deploy(archive_path):
+    """Function to distribute an archive to your web servers"""
     if not exists(archive_path):
         return False
     try:
         file_name = archive_path.split("/")[-1]
         name = file_name.split(".")[0]
-        path_name = f"/data/web_static/releases/{name}"
-
-        # Connect to each server and execute commands
-        for host in hosts:
-            conn = Connection(host=host, user=user, connect_kwargs={
-                              "key_filename": key_path})
-
-            conn.put(archive_path, "/tmp/")
-            conn.run(f"mkdir -p {path_name}/")
-            conn.run(f"tar -xzf /tmp/{file_name} -C {path_name}/")
-            conn.run(f"rm /tmp/{file_name}")
-            conn.run(f"mv {path_name}/web_static/* {path_name}")
-            conn.run(f"rm -rf {path_name}/web_static")
-            conn.run("rm -rf /data/web_static/current")
-            conn.run(f"ln -s {path_name}/ /data/web_static/current")
-
+        path_name = "/data/web_static/releases/" + name
+        put(archive_path, "/tmp/")
+        run("mkdir -p {}/".format(path_name))
+        run('tar -xzf /tmp/{} -C {}/'.format(file_name, path_name))
+        run("rm /tmp/{}".format(file_name))
+        run("mv {}/web_static/* {}".format(path_name, path_name))
+        run("rm -rf {}/web_static".format(path_name))
+        run('rm -rf /data/web_static/current')
+        run('ln -s {}/ /data/web_static/current'.format(path_name))
         return True
-    except Exception as e:
-        print(f"Error: {e}")
+    except Exception:
         return False
+
+# Run the script like this:
+# $ fab -f 2-do_deploy_web_static.py
+# do_deploy:archive_path=versions/file_name.tgz
