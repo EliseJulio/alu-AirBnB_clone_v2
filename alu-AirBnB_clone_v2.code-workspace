@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../../../../Downloads/alu-AirBnB_clone_v2-master/alu-AirBnB_clone_v2-master/web_flask"
+		},
+		{
+			"path": "../../../../Downloads/alu-AirBnB_clone_v2-master/alu-AirBnB_clone_v2-master/models"
+		},
+		{
+			"path": "../../../../Downloads/alu-AirBnB_clone_v2-master/alu-AirBnB_clone_v2-master/tests"
+		}
+	],
+	"settings": {}
+}
